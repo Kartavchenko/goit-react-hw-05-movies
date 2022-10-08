@@ -8,7 +8,8 @@ export const movieAPI = async () => {
   //   const REVIES = 'movie/{movie_id}/reviews';
 
   const movies = await fetch(`${BASE_URL}/${TRENDING}?api_key=${API_KEY}`);
-  console.log(movies);
+  // console.log(movies);
+  const res = await movies.json();
   //   console.log(movies.json());
-  return await movies.json();
+  return res;
 };

@@ -1,5 +1,6 @@
-// import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Link, Header } from './App.styled';
+// import { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 import { movieAPI } from '../service/movieAPI';
 import { Home } from '../pages/Home';
@@ -10,7 +11,6 @@ import { Reviews } from '../pages/Reviews';
 
 export const App = () => {
   // const [films, setFilms] = useState([]);
-  console.log(movieAPI());
 
   // useEffect(() => {
   //   const fetchFilms = async() => {
@@ -20,6 +20,12 @@ export const App = () => {
 
   return (
     <div>
+      <Header>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="movies">Movies</Link>
+        </nav>
+      </Header>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
