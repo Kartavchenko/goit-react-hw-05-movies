@@ -1,6 +1,11 @@
 import styled from "@emotion/styled"
 import { NavLink } from "react-router-dom";
 
+export const Container = styled.div`
+  padding-left: 15px;
+  padding-right: 15px; 
+`;
+
 export const Link = styled(NavLink)`
   margin-left: 30px;
   text-decoration: none;
