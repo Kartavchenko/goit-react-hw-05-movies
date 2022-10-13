@@ -1,26 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { movieSearch } from '../../service/movieAPI';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useSearchParams, useLocation } from 'react-router-dom';
 
-export const Movies = () => {
-  const [search, setSearch] = useState('');
+const Movies = () => {
+  const location = useLocation();
   const [movie, setMovie] = useState([]);
-  // const [searchParams] = useSearchParams();
-  // const query = searchParams.get('query');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get('query') ?? '';
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const data = await movieSearch(search);
+    const data = await movieSearch(query);
     setMovie(data);
   };
 
-  const handleChange = e => setSearch(e.target.value);
+  useEffect(() => {
+    console.log(query);
+  }, [query]);
+
+  const handleChange = e =>
+    setSearchParams(e.target.value !== '' ? { query: e.target.value } : {});
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={search}
+          value={query}
           name="search"
           onChange={handleChange}
         />
@@ -31,7 +38,9 @@ export const Movies = () => {
           movie.map(({ id, original_title }) => {
             return (
               <li key={id}>
-                <NavLink to={`/movies/${id}`}>{original_title}</NavLink>
+                <NavLink to={`/movies/${id}`} state={{ search: location }}>
+                  {original_title}
+                </NavLink>
               </li>
             );
           })}
@@ -39,3 +48,5 @@ export const Movies = () => {
     </div>
   );
 };
+
+export default Movies;

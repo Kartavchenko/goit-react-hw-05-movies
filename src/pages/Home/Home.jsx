@@ -17,16 +17,18 @@ export const Home = () => {
   }, []);
 
   return (
-    <ul>
-      {item.map(({ original_title, name, id }) => {
-        return (
-          <li key={id}>
-            <NavLink to={`/movies/${id}`}>
-              {original_title ? original_title : name}
-            </NavLink>
-          </li>
-        );
-      })}
-    </ul>
+    <main>
+      <ul>
+        {item.map(({ original_title, name, id }) => {
+          return (
+            <li key={id}>
+              <NavLink to={`/movies/${id}`}>
+                {original_title ? original_title : name}
+              </NavLink>
+            </li>
+          );
+        })}
+      </ul>
+    </main>
   );
 };

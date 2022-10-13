@@ -8,7 +8,7 @@ export const Container = styled.div`
   padding-left: 15px;
 `;
 
-export const BtnGoBack = styled.button`
+export const BtnGoBack = styled(NavLink)`
   display: flex;
   align-items: center;
   background-color: transparent;
@@ -25,11 +25,17 @@ export const Podcasts = styled(NavLink)`
   margin-bottom: 15px;
 `;
 
-export const BoxPodcasts = styled.ul`
+export const ListPodcasts = styled.ul`
   padding: 15px;
   list-style: none;
   margin: 0;
 `;
+
+export const ListBorder = styled.ul`
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+`;
+
 
 export const Poster = styled.img`
   width: 300px;

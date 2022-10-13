@@ -1,10 +1,6 @@
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = '88dd01fe4db3764066bc9e293cf17684';
 const TRENDING = 'trending/movie/day';
-//   const SEARCH = 'search/movie';
-// const DETAILS = 'movie/{movie_id}';
-//   const CREDITS = 'movie/{movie_id}/credits';
-//   const REVIES = 'movie/{movie_id}/reviews';
 
 export const movieTrending = async () => {
   const movies = await fetch(`${BASE_URL}${TRENDING}?api_key=${API_KEY}`);
@@ -36,7 +32,7 @@ export const movieCast = async movieId => {
 
 export const movieReviews = async movieId => {
   const movies = await fetch(
-    `${BASE_URL}review/${movieId}/reviews?api_key=${API_KEY}`
+    `${BASE_URL}movie/${movieId}/reviews?api_key=${API_KEY}`
   );
   const response = await movies.json();
   return response.results;

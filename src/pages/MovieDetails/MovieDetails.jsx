@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { movieDetails } from '../../service/movieAPI';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import {
@@ -9,13 +9,14 @@ import {
   BtnGoBack,
   Poster,
   Podcasts,
-  BoxPodcasts,
+  ListPodcasts,
+  ListBorder,
 } from './MovieDetail.styled';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -29,11 +30,10 @@ export const MovieDetails = () => {
     fetchMovies();
   }, [movieId]);
 
-  const goBack = () => navigate(-1);
   const image = 'https://image.tmdb.org/t/p/w500';
 
   return (
-    <div>
+    <main>
       {movie &&
         movie.map(
           ({
@@ -47,7 +47,10 @@ export const MovieDetails = () => {
             return (
               <Container key={id}>
                 <div>
-                  <BtnGoBack type="button" onClick={goBack}>
+                  <BtnGoBack
+                    type="button"
+                    to={location.state?.search ?? '/movies'}
+                  >
                     <AiOutlineArrowLeft />
                     Go Back
                   </BtnGoBack>
@@ -76,16 +79,23 @@ export const MovieDetails = () => {
           }
         )}
       {movie && (
-        <BoxPodcasts>
+        <ListPodcasts>
           <li>
-            <Podcasts to={`cast`}>Cast</Podcasts>
+            <ListBorder>
+              <li>Additional information</li>
+              <li>
+                <Podcasts to={`cast`}>Cast</Podcasts>
+              </li>
+              <li>
+                <Podcasts to={`reviews`}>Reviews</Podcasts>
+              </li>
+            </ListBorder>
+            <Outlet />
           </li>
-          <li>
-            <Podcasts to={`reviews`}>Reviews</Podcasts>
-          </li>
-          <Outlet />
-        </BoxPodcasts>
+        </ListPodcasts>
       )}
-    </div>
+    </main>
   );
 };
+
+export default MovieDetails;
