@@ -49,7 +49,7 @@ const MovieDetails = () => {
                 <div>
                   <BtnGoBack
                     type="button"
-                    to={location.state?.search ?? '/movies'}
+                    to={location.state?.from ?? '/movies'}
                   >
                     <AiOutlineArrowLeft />
                     Go Back

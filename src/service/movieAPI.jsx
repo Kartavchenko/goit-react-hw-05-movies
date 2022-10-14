@@ -35,5 +35,6 @@ export const movieReviews = async movieId => {
     `${BASE_URL}movie/${movieId}/reviews?api_key=${API_KEY}`
   );
   const response = await movies.json();
+  console.log(response);
   return response.results;
 };

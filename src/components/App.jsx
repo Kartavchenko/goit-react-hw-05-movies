@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import { Link, Header, Container } from './App.styled';
-import { Home } from '../pages/Home/Home';
 import { lazy, Suspense } from 'react';
 
+const Home = lazy(() => import('../pages/Home/Home'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails/MovieDetails'));
 const Cast = lazy(() => import('../pages/Cast/Cast'));
 const Reviews = lazy(() => import('../pages/Reviews/Reviews'));

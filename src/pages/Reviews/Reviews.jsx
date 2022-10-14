@@ -6,6 +6,8 @@ const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
 
+  // location state from
+
   useEffect(() => {
     const fetchMovies = async () => {
       const data = await movieReviews(movieId);
@@ -13,16 +15,19 @@ const Reviews = () => {
     };
     fetchMovies();
   }, [movieId]);
+
   return (
     <ul>
-      {reviews.map(({ id, author, content }) => {
-        return (
-          <li key={id}>
-            <h3>Author: {author}</h3>
-            <p>{content}</p>
-          </li>
-        );
-      })}
+      {reviews.length > 0
+        ? reviews.map(({ id, author, content }) => {
+            return (
+              <li key={id}>
+                <h3>Author: {author}</h3>
+                <p>{content}</p>
+              </li>
+            );
+          })
+        : 'nothing'}
     </ul>
   );
 };

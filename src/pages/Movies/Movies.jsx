@@ -1,33 +1,42 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { movieSearch } from '../../service/movieAPI';
 import { NavLink, useSearchParams, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Movies = () => {
   const location = useLocation();
   const [movie, setMovie] = useState([]);
+  const [movieName, setMovieName] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get('query') ?? '';
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const data = await movieSearch(query);
-    setMovie(data);
+    setSearchParams({ query: movieName });
   };
 
   useEffect(() => {
-    console.log(query);
+    if (!query) {
+      return;
+    }
+    const fetchMovie = async () => {
+      const data = await movieSearch(query);
+      setMovie(data);
+    };
+    fetchMovie();
   }, [query]);
 
-  const handleChange = e =>
-    setSearchParams(e.target.value !== '' ? { query: e.target.value } : {});
+  const handleChange = e => {
+    setMovieName(e.target.value);
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={query}
+          value={movieName}
           name="search"
           onChange={handleChange}
         />
@@ -38,7 +47,7 @@ const Movies = () => {
           movie.map(({ id, original_title }) => {
             return (
               <li key={id}>
-                <NavLink to={`/movies/${id}`} state={{ search: location }}>
+                <NavLink to={`/movies/${id}`} state={{ from: location }}>
                   {original_title}
                 </NavLink>
               </li>
