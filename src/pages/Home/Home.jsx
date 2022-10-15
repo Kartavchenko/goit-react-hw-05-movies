@@ -1,10 +1,9 @@
 import { movieTrending } from '../../service/movieAPI';
-import { NavLink, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import MovieList from 'components/MoviesList/MoviesList';
 
 const Home = () => {
-  const location = useLocation();
-
   const [item, setItem] = useState([]);
   useEffect(() => {
     const fetchMovies = async () => {
@@ -20,19 +19,14 @@ const Home = () => {
 
   return (
     <main>
-      <ul>
-        {item.map(({ original_title, name, id }) => {
-          return (
-            <li key={id}>
-              <NavLink to={`/movies/${id}`} state={{ from: location }}>
-                {original_title ? original_title : name}
-              </NavLink>
-            </li>
-          );
-        })}
-      </ul>
+      <MovieList item={item} />
     </main>
   );
 };
 
 export default Home;
+
+Home.propTypes = {
+  item: PropTypes.array,
+  MovieList: PropTypes.element,
+};

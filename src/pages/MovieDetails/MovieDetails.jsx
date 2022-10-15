@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { movieDetails } from '../../service/movieAPI';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import {
@@ -14,7 +15,7 @@ import {
 } from './MovieDetail.styled';
 
 const MovieDetails = () => {
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState([]);
   const { movieId } = useParams();
   const location = useLocation();
 
@@ -99,3 +100,11 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+  movie: PropTypes.array,
+  image: PropTypes.string,
+  AiOutlineArrowLeft: PropTypes.element,
+  Item: PropTypes.element,
+  Podcasts: PropTypes.string,
+};

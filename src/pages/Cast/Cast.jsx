@@ -1,6 +1,7 @@
 import { movieCast } from 'service/movieAPI';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Cast = () => {
   const [actors, setActors] = useState([]);
@@ -37,3 +38,8 @@ const Cast = () => {
 };
 
 export default Cast;
+
+Cast.ptopTypes = {
+  actors: PropTypes.array,
+  image: PropTypes.string,
+};

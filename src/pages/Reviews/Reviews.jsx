@@ -1,12 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { movieReviews } from 'service/movieAPI';
+import PropTypes from 'prop-types';
 
 const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
-
-  // location state from
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -33,3 +32,7 @@ const Reviews = () => {
 };
 
 export default Reviews;
+
+Reviews.propTypes = {
+  reviews: PropTypes.array,
+};

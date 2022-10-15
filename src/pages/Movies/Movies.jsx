@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { movieSearch } from '../../service/movieAPI';
-import { NavLink, useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { movieSearch } from '../../service/movieAPI';
+import PropTypes from 'prop-types';
+import MovieList from 'components/MoviesList/MoviesList';
 
 const Movies = () => {
-  const location = useLocation();
   const [movie, setMovie] = useState([]);
   const [movieName, setMovieName] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -42,20 +43,18 @@ const Movies = () => {
         />
         <button type="submit">Submit</button>
       </form>
-      <ul>
-        {movie &&
-          movie.map(({ id, original_title }) => {
-            return (
-              <li key={id}>
-                <NavLink to={`/movies/${id}`} state={{ from: location }}>
-                  {original_title}
-                </NavLink>
-              </li>
-            );
-          })}
-      </ul>
+      <MovieList item={movie} />
     </div>
   );
 };
 
 export default Movies;
+
+Movies.propTypes = {
+  movie: PropTypes.array,
+  movieName: PropTypes.string,
+  searchParams: PropTypes.string,
+  handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
+  MovieList: PropTypes.element,
+};
