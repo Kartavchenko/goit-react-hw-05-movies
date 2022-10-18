@@ -1,7 +1,7 @@
 import { Link, Head, Container } from './Header.styled';
 import { Outlet } from 'react-router-dom';
 
-const ShaderLayout = () => {
+const OutLine = () => {
   return (
     <>
       <Head>
@@ -17,4 +17,4 @@ const ShaderLayout = () => {
   );
 };
 
-export default ShaderLayout;
+export default OutLine;

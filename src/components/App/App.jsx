@@ -1,4 +1,4 @@
-import ShaderLayout from '../Header/ShaderLayout';
+import OutLine from '../Header/ShaderLayout';
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
@@ -13,10 +13,9 @@ const Movies = lazy(() => import('../../pages/Movies/Movies'));
 export const App = () => {
   return (
     <>
-      {/* <Header /> */}
       <Suspense>
         <Routes>
-          <Route path="/" element={<ShaderLayout />}>
+          <Route path="/" element={<OutLine />}>
             <Route index element={<Home />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/movies/:movieId" element={<MovieDetails />}>
